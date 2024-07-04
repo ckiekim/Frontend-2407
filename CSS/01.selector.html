@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Selector</title>
+    <style>
+        * { font-family: d2coding; }
+        p, h1, h2 { text-align: center; color: red; }
+        #para1 { text-align: center; color: red; }
+        .center { text-align: center; color: red; }
+        div > p { text-align: center; color: blue; }    /* 자식 셀렉터 */
+    </style>
+</head>
+<body style="margin: 40px;">
+    <h1 id="para1">Red and center-aligned heading</h1>
+    <p>Red and center-aligned paragraph.</p>
+    <p class="center">Red and center-aligned paragraph.</p>
+    <h1>Red and center-aligned heading</h1>
+    <h2>Red and center-aligned heading</h2>
+    <div>
+        <p>Blue and center-aligned paragraph</p>
+        <section>
+            <p>Red and center-aligned paragraph.</p>
+        </section>
+    </div>
+</body>
+</html>
