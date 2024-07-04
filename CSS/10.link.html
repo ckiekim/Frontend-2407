@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link</title>
+    <style>
+        /* unvisited link */
+        a:link { color: red; }
+        /* visited link */
+        a:visited { color: green; }
+        /* mouse over link */
+        a:hover { color: hotpink; }
+        /* selected link */
+        a:active { color: blue; }
+        /* 밑줄을 없애고 싶을때 */
+        a { text-decoration: none; }
+        
+        div > a:link, div > a:visited {
+            background-color: #f44336;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        div > a:hover, div > a:active {
+            background-color: red;
+        }
+    </style>
+</head>
+<body style="margin: 40px;">
+    <h2>Link style</h2>
+    <a href="#">Link Style</a>
+    <h2>Link button</h2>
+    <div>
+        <a href="#" target="_blank">이것은 링크임</a>
+    </div>
+</body>
+</html>

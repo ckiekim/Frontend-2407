@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Noto Sans KR', sans-serif; }
+        img.a { vertical-align: baseline; }
+        img.b { vertical-align: text-top; }
+        img.c { vertical-align: text-bottom; }
+        img.d { vertical-align: sub; }
+        img.e { vertical-align: super; }
+    </style>
+</head>
+<body style="margin: 40px; background-color: #fafafa;">
+    <h2>글씨</h2>
+    <p>
+        문서 디자인에 의미가 있는 글을 담으면 사람들은 양식을 보지 않고 글의 내용에 집중하는 경향이 있다. 
+        예를 들어 
+        <span style="color: blueviolet;">"나무위키의 서버는 파라과이에 있다."</span>라는 
+        문장을 적으면 대부분의 사람들은 글씨체에 집중하지 않고 글의 내용에 집중하게 될 것이다. 
+        그렇다고 의미 없이 아무런 글자를 무작위로 입력해도 안 된다. 그런 텍스트는 아름답지도 않고 
+        폰트나 레이아웃은 글 내용의 무질서함에 가려져 보이지 않을 것이다. 
+        예를 들어 "askfiofsikf"같이 아무렇게나 입력한 문자열로 폰트를 평가한다면 폰트, 
+        레이아웃은 보이지 않고 애들 장난같이 보일 것이다.
+    </p>
+    <hr>
+    <h2>vertical-align: baseline (default):</h2>
+    <p>An <img class="a" src="sqpurple.gif" width="9" height="9"> image with a default alignment.</p> 
+
+    <h2>vertical-align: text-top:</h2>
+    <p>An <img class="b" src="sqpurple.gif" width="9" height="9"> image with a text-top alignment.</p> 
+
+    <h2>vertical-align: text-bottom:</h2>
+    <p>An <img class="c" src="sqpurple.gif" width="9" height="9"> image with a text-bottom alignment.</p>
+
+    <h2>vertical-align: sub:</h2>
+    <p>An <img class="d" src="sqpurple.gif" width="9" height="9"> image with a sub alignment.</p> 
+
+    <h2>vertical-align: sup:</h2>
+    <p>An <img class="e" src="sqpurple.gif" width="9" height="9"> image with a super alignment.</p>
+</body>
+</html>
