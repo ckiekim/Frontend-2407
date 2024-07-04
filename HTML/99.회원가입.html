@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        td, input { padding: 3px; }
+        .label { text-align: center; }
+        .container { width: 50%; margin: auto; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <img src="https://picsum.photos/1000/120" alt="배경화면" width="100%">
+    <div class="container">
+        <h1 class="label">회원가입</h1>
+        <form action="#" method="post">
+            <table>
+                <tr>
+                    <td style="width: 40%;" class="label"><label for="uid">사용자 ID(*)</label></td>
+                    <td style="width: 60%;"><input type="text" name="uid" id="uid" size="40"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="pwd">패스워드(*)</label></td>
+                    <td><input type="password" name="pwd" id="pwd" size="40"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="pwd2">패스워드 확인(*)</label></td>
+                    <td><input type="password" name="pwd2" id="pwd2" size="40"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="uname">이름(*)</label></td>
+                    <td><input type="text" name="uname" id="uname" size="40"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="gender">성별(*)</label></td>
+                    <td class="label">
+                        <input type="radio" name="gender" id="male" value="male" checked>
+                        <label for="male">남</label>
+                        <input type="radio" name="gender" id="female" value="female" style="margin-left: 50px;">
+                        <label for="female">여</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="email">이메일(*)</label></td>
+                    <td><input type="email" name="email" id="email" size="40"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="tel">전화번호</label></td>
+                    <td><input type="tel" name="tel" id="tel" size="40"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="intro">자기소개</label></td>
+                    <td>
+                        <textarea name="intro" id="intro" rows="10" cols="42"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" colspan="2">
+                        <input type="submit" value=" 제출 ">
+                        <input type="reset" value=" 취소 ">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <p style="text-align: right;">* 는 필수 항목입니다.</p>
+    </div>
+</body>
+</html>

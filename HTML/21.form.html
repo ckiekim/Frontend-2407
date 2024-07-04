@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입력 Form</title>
+    <style>
+        label, input, select { padding: 5px; }
+    </style>
+</head>
+<body style="margin: 40px;">
+    <form action="#" method="get">
+        <label for="uname">User name</label><br>
+        <input type="text" name="uname" id="uname" placeholder="uname을 입력하세요." required><br><br>
+        <label for="pwd">패스워드</label><br>
+        <input type="password" name="pwd" id="pwd" size="30"><br><br>
+        <label for="tel">전화번호</label><br>
+        <input type="tel" id="tel" value="114" autofocus><br><br>
+        <label for="email">이메일</label><br>
+        <input type="email" id="email" disabled><br><br>
+
+        <input type="radio" id="html" name="fav_language" value="HTML">
+        <label for="html">HTML</label><br>
+        <input type="radio" id="css" name="fav_language" value="CSS" checked>
+        <label for="css">CSS</label><br>
+        <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+        <label for="javascript">JavaScript</label><br><br>
+
+        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked>
+        <label for="vehicle1"> I have a bike</label><br>
+        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+        <label for="vehicle2"> I have a car</label><br>
+        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" checked>
+        <label for="vehicle3"> I have a boat</label><br><br>
+
+        <label for="fruits">좋아하는 과일</label><br>
+        <select name="fruits" id="fruits">
+            <option value="apple">사과</option>
+            <option value="watermelon">수박</option>
+            <option value="strawberry" selected>딸기</option>
+        </select><br><br>
+
+        <label for="intro">자기 소개</label><br>
+        <textarea name="intro" id="intro" rows="10" cols="60"></textarea><br><br>
+
+        <input type="submit" value="제출">
+        <input type="reset" value="입력한 데이터 없애기">
+    </form>
+</body>
+</html>
