@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <style>
+        table, th, td { border: 1px solid; }
+        table.collapse { border-collapse: collapse; }
+        table.size { width: 300px; }
+        th.size { height: 70px; }
+        td.center { text-align: center; height: 50px; vertical-align: bottom; }
+        td.right { text-align: right; padding-right: 10px; }
+    </style>
+</head>
+<body style="margin: 40px;">
+    <h2>Table</h2>
+    <table style="width: 20%;">
+        <tr><th>Firstname</th><th>Lastname</th></tr>
+        <tr><td>Peter</td><td>Griffin</td></tr>
+        <tr><td>Lois</td><td>Griffin</td></tr>
+    </table><br>
+    <table class="collapse">
+        <tr><th>Firstname</th><th>Lastname</th></tr>
+        <tr><td>Peter</td><td>Griffin</td></tr>
+        <tr><td>Lois</td><td>Griffin</td></tr>
+    </table><br>
+    <table class="size">
+        <tr><th class="size">Firstname</th><th class="size">Lastname</th></tr>
+        <tr><td>Peter</td><td>Griffin</td></tr>
+        <tr><td>Lois</td><td>Griffin</td></tr>
+    </table><br>
+    <table class="collapse size">
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Savings</th>
+        </tr>
+        <tr>
+          <td class="center">Peter</td>
+          <td class="center">Griffin</td>
+          <td class="right">$100</td>
+        </tr>
+        <tr>
+          <td class="center">Lois</td>
+          <td class="center">Griffin</td>
+          <td class="right">$150</td>
+        </tr>
+        <tr>
+          <td class="center">Joe</td>
+          <td class="center">Swanson</td>
+          <td class="right">$300</td>
+        </tr>
+        <tr>
+          <td class="center">Cleveland</td>
+          <td class="center">Brown</td>
+          <td class="right">$1,250</td>
+        </tr>
+      </table>
+</body>
+</html>

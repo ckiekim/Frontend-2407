@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position</title>
+    <style>
+        div { margin: 10px 0px; }
+        .static { position: static; border: 3px solid #73AD21; }
+        .relative { position: relative; left: 30px; border: 3px solid #73AD21; }
+        .fixed { position: fixed; bottom: 0; right: 0; width: 300px; border: 3px solid #73AD21; }
+        .relative2 { position: relative; width: 400px; height: 200px; border: 3px solid #73AD21; }
+        .absolute { position: absolute; top: 80px; right: 0; width: 200px; height: 100px; border: 3px solid #73AD21; }
+        .sticky { position: -webkit-sticky; /* Safari */
+                position: sticky; top: 0; background-color: green; border: 2px solid #4CAF50; }
+    </style>
+</head>
+<body style="margin: 40px; height: 2000px;">
+    <h2>Position</h2>
+    <div class="static">
+        This &lt;div&gt; element has position: static;
+    </div>
+    <div class="relative">
+        This  &lt;div&gt; element has position: relative;
+    </div>
+    <div class="fixed" style="margin-bottom: 0px;">
+        This  &lt;div&gt; element has position: fixed
+    </div>
+    <div class="relative2">
+        This  &lt;div&gt; element has position: relative;
+        <div class="absolute">
+            This  &lt;div&gt; element has position: absolute;
+        </div>
+    </div>
+    <div class="sticky">I am sticky!</div>
+</body>
+</html>
