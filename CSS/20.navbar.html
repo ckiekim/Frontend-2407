@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+    <style>
+        ul.basic { list-style-type: none; margin: 0; padding: 0; width: 60px; }
+        .basic > li a { display: block; }
+        ul.vertical { list-style-type: none; margin: 0; padding: 0; width: 200px; 
+            background-color: #f1f1f1; }
+        .vertical > li a { display: block; color: #000; padding: 8px 16px; text-decoration: none; }
+        .vertical > li a:hover { background-color: #555; color: white; }
+        .active { background-color: #04aa6d; color: white; }
+        ul.inline { list-style-type: none; margin: 0; padding: 0; }
+        li.inline { display: inline; }
+        li.inline a { display: inline; }
+        ul.horizontal { list-style-type: none; margin: 0; padding: 0; overflow: hidden;
+            background-color: #333; }
+        li.horizontal { float: left; }
+        li.horizontal a { display: block; color: white; text-align: center;
+            padding: 14px 16px; text-decoration: none; }
+        li.horizontal a:hover { background-color: #111; }
+    </style>
+</head>
+<body style="margin: 40px;">
+    <h2>Vertical Navigation Bar</h2>
+    <ul class="basic">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">About</a></li>
+    </ul>
+    <br>
+    <ul class="vertical">
+        <li><a class="active" href="#">Home</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">About</a></li>
+    </ul>
+    <br>
+    <h2>Horizontal Navigation Bar</h2>
+    <ul class="inline">
+        <li class="inline"><a href="#">Home</a></li>
+        <li class="inline"><a href="#">News</a></li>
+        <li class="inline"><a href="#">Contact</a></li>
+        <li class="inline"><a href="#">About</a></li>
+    </ul>
+    <br>
+    <ul class="horizontal">
+        <li class="horizontal"><a href="#">Home</a></li>
+        <li class="horizontal"><a class="active" href="#">News</a></li>
+        <li class="horizontal"><a href="#">Contact</a></li>
+        <li class="horizontal"><a href="#">About</a></li>
+    </ul>
+    <br>
+    <ul class="horizontal">
+        <li class="horizontal"><a href="#">Home</a></li>
+        <li class="horizontal"><a href="#">News</a></li>
+        <li class="horizontal"><a href="#">Contact</a></li>
+        <li style="float: right;" class="horizontal"><a class="active" href="#">About</a></li>
+    </ul>
+</body>
+</html>
