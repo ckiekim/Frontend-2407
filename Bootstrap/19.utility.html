@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap 5 Utilities</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    span {
+      display: inline-block; width: 70px; height: 70px; margin: 6px; background-color: #f9f9f9;
+    }
+    .grey { background-color: #555; }
+  </style>
+</head>
+<body>
+  <div class="container-fluid p-5 bg-primary text-white text-center">
+    <h1>Utilities</h1>
+  </div>
+
+  <div class="container mt-5">
+    <h2>Border</h2>
+    <span class="border"></span>
+    <span class="border border-0"></span>
+    <span class="border border-top-0"></span>
+    <span class="border border-end-0"></span>
+    <span class="border border-bottom-0"></span>
+    <span class="border border-start-0"></span>
+    <br>
+    <span class="border-top"></span>
+    <span class="border-end"></span>
+    <span class="border-bottom"></span>
+    <span class="border-start"></span>
+    <span class="border border-1 ms-5"></span>
+    <span class="border border-2"></span>
+    <span class="border border-3"></span>
+    <span class="border border-4"></span>
+    <span class="border border-5"></span>
+    <br>
+    <span class="border border-primary border-5"></span>
+    <span class="border border-secondary"></span>
+    <span class="border border-success"></span>
+    <span class="border border-danger"></span>
+    <span class="border border-warning"></span>
+    <span class="border border-info"></span>
+    <span class="border border-light"></span>
+    <span class="border border-dark"></span>
+    <span class="border border-white"></span>
+    <br>
+    <span class="rounded grey"></span>
+    <span class="rounded-top grey"></span>
+    <span class="rounded-end grey"></span>
+    <span class="rounded-bottom grey"></span>
+    <span class="rounded-start grey"></span>
+    <span class="rounded-circle grey"></span>
+    <span class="rounded-pill grey" style="width:130px"></span>
+    <br>
+    <span class="rounded-0 grey"></span>
+    <span class="rounded-1 grey"></span>
+    <span class="rounded-2 grey"></span>
+    <span class="rounded-3 grey"></span>
+    <span class="rounded-4 grey"></span>
+    <span class="rounded-5 grey"></span>
+
+    <h2 class="mt-3">Float</h2>
+    <div class="clearfix">
+      <span class="float-start border" style="width: 120px; height: 30px;">Float left</span>
+      <span class="float-end border" style="width: 120px; height: 30px;">Float right</span>
+    </div>
+
+    <h2 class="mt-3">Center Align</h2>
+    <div class="mx-auto bg-warning" style="width:150px">Centered</div>
+
+    <h2 class="mt-3">Width</h2>
+    <div class="w-25 bg-warning">Width 25%</div>
+    <div class="w-50 bg-warning">Width 50%</div>
+    <div class="w-75 bg-warning">Width 75%</div>
+    <div class="w-100 bg-warning">Width 100%</div>
+    <div class="w-auto bg-warning">Auto Width</div>
+    <div class="mw-100 bg-warning">Max Width 100%</div>
+
+    <h2 class="mt-3">Height</h2>
+    <div style="height: 200px; background-color: #ddd">
+      <div class="h-25 d-inline-block p-2 bg-warning">Height 25%</div>
+      <div class="h-50 d-inline-block p-2 bg-warning">Height 50%</div>
+      <div class="h-75 d-inline-block p-2 bg-warning">Height 75%</div>
+      <div class="h-100 d-inline-block p-2 bg-warning">Height 100%</div>
+      <div class="h-auto d-inline-block p-2 bg-warning">Auto Height</div>
+      <div class="mh-100 d-inline-block p-2 bg-warning" style="height:500px">Max Height 100%</div>
+    </div>
+
+    <h2 class="mt-3">Spacing</h2>
+    <div class="pt-4 bg-warning">I only have a top padding (1.5rem)</div>
+    <div class="p-5 bg-success">I have a padding on all sides (3rem)</div>
+    <div class="m-5 pb-5 bg-info">I have a margin on all sides (3rem) and a bottom padding (3rem)</div>
+  
+    <h2 class="mt-3">Shadow</h2>
+    <div class="shadow-none p-4 mb-4 bg-light">No shadow</div>
+    <div class="shadow-sm p-4 mb-4 bg-white">Small shadow</div>
+    <div class="shadow p-4 mb-4 bg-white">Default shadow</div>
+    <div class="shadow-lg p-4 mb-4 bg-white">Large shadow</div>
+
+    <h2 class="mt-3">Aspect Ratio</h2>
+    <div class="row">
+      <div class="col">
+        <!-- Aspect ratio 1:1 -->
+        <div class="ratio ratio-1x1">
+          <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+        </div>
+      </div>
+      <div class="col">
+        <!-- Aspect ratio 4:3 -->
+        <div class="ratio ratio-4x3">
+          <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+        </div>
+      </div>
+      <div class="col">
+        <!-- Aspect ratio 16:9 -->
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+        </div>
+      </div>
+      <!-- Aspect ratio 21:9 -->
+      <div class="col">
+        <div class="ratio ratio-21x9">
+          <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="mt-3">Visibility</h2>
+    <div class="invisible">I am invisible</div>
+    <div class="d-none">display none</div>
+    <div class="visible">I am visible</div>
+  </div>
+</body>
+</html>
