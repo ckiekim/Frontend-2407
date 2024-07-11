@@ -10,7 +10,7 @@
   <script src="https://kit.fontawesome.com/fdb840a8cc.js" crossorigin="anonymous"></script>
   <style>
     * { font-family: 'Noto Sans KR', sans-serif; }
-    a { text-decoration: none; }
+    a { text-decoration: none; color: inherit; }
     th { text-align: center; width: 14.28%; }
 		td { height: 120px; }
   </style>
@@ -26,10 +26,13 @@
           <a class="nav-link" href="#"><i class="fa-solid fa-table-list"></i> 게시판</a>
         </li>
         <li class="nav-item ms-3">
+          <a class="nav-link active" href="#"><i class="fa-solid fa-calendar-days"></i> 스케쥴</a>
+        </li>
+        <li class="nav-item ms-3">
           <a class="nav-link" href="#"><i class="fa-solid fa-user-group"></i> 사용자</a>
         </li>
         <li class="nav-item dropdown ms-3">
-          <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
             <i class="fa-solid fa-brain"></i> 인공지능
           </a>
           <ul class="dropdown-menu">
@@ -93,13 +96,14 @@
           <tr>
             <td>
               <div class="d-flex justify-content-between">
-                <div class="text-danger" style="opacity: 0.5;"><strong>30</strong></div>
+                <div class="text-danger" style="opacity: 0.5;"><strong>
+                  <a data-bs-toggle="modal" href="#schedule">30</a></strong></div>
                 <div></div>
               </div>
             </td>
             <td>
               <div class="d-flex justify-content-between">
-                <div><strong>1</strong></div>
+                <div><strong><a data-bs-toggle="modal" href="#schedule">1</a></strong></div>
                 <div></div>
               </div>
             </td>
@@ -324,5 +328,25 @@
     </div>
   </nav>
   
+  <div class="modal" id="schedule">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          Modal body..
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
