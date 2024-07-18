@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디지털 시계</title>
+</head>
+<body style="margin: 40px;">
+    <h1 id="time"></h1>
+    <script>
+        function twoDigit(num) {
+            return num < 10 ? '0' + num : String(num);      // 4 --> '04', 15 --> '15'
+        }
+        function myClock() {
+            let date = new Date();
+            return `${twoDigit(date.getHours())}:${twoDigit(date.getMinutes())}:${twoDigit(date.getSeconds())}`;
+        }
+        let si = setInterval(() => {
+            const timeStr = myClock();
+            document.getElementById('time').innerHTML = timeStr;
+        }, 1000);
+        setTimeout(() => {
+            clearInterval(si);
+        }, 30000);
+    </script>
+</body>
+</html>
