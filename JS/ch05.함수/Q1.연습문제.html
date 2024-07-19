@@ -15,54 +15,70 @@
 
   <div class="container mt-5">
     <div class="row">
-        <div class="col-4">
-            <h3>Q1. 나이계산</h3>
-            <hr>
-            <table class="table table-borderless">
-                <tr>
-                    <td><input class="form-control" type="text" id="bYear" placeholder="생년"></td>
-                    <td><input class="form-control" type="text" id="bMonth" placeholder="생월"></td>
-                </tr>
-                <tr>
-                    <td><input class="form-control" type="text" id="bDay" placeholder="생일"></td>
-                    <td><button class="btn btn-primary" onclick="answer1()">확인</button></td>
-                </tr>
-            </table>
-            <hr>
-            <div id="result1"></div>
-        </div>
-        <div class="col-4">
-            <h3>Q2. 사분면</h3>
-            <hr>
-            <table class="table table-borderless">
-                <tr>
-                    <td><input class="form-control" type="text" id="x" placeholder="X 좌표"></td>
-                    <td><input class="form-control" type="text" id="y" placeholder="Y 좌표"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><button class="btn btn-primary" onclick="answer2()">확인</button></td>
-                </tr>
-            </table>
-            <hr>
-            <div id="result2"></div>
-        </div>
-        <div class="col-4">
-            <h3>Q3. 주사위 3개</h3>
-            <hr>
-            <table class="table table-borderless">
-                <tr>
-                    <td><input class="form-control" type="text" id="dice1" placeholder="주사위 1"></td>
-                    <td><input class="form-control" type="text" id="dice2" placeholder="주사위 2"></td>
-                </tr>
-                <tr>
-                    <td><input class="form-control" type="text" id="dice3" placeholder="주사위 3"></td>
-                    <td><button class="btn btn-primary" onclick="answer3()">확인</button></td>
-                </tr>
-            </table>
-            <hr>
-            <div id="result3"></div>
-        </div>
+			<div class="col-4">
+				<h3>Q1. 나이계산</h3>
+				<hr>
+				<table class="table table-borderless">
+					<tr>
+						<td><input class="form-control" type="text" id="bYear" placeholder="생년"></td>
+						<td>
+							<!-- <input class="form-control" type="text" id="bMonth" placeholder="생월"> -->
+							<select class="form-control" id="bMonth">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td><input class="form-control" type="text" id="bDay" placeholder="생일"></td>
+						<td><button class="btn btn-primary" onclick="answer1()">확인</button></td>
+					</tr>
+				</table>
+				<hr>
+				<div id="result1"></div>
+			</div>
+			<div class="col-4">
+				<h3>Q2. 사분면</h3>
+				<hr>
+				<table class="table table-borderless">
+					<tr>
+						<td><input class="form-control" type="text" id="x" placeholder="X 좌표"></td>
+						<td><input class="form-control" type="text" id="y" placeholder="Y 좌표"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><button class="btn btn-primary" onclick="answer2()">확인</button></td>
+					</tr>
+				</table>
+				<hr>
+				<div id="result2"></div>
+			</div>
+			<div class="col-4">
+				<h3>Q3. 주사위 3개</h3>
+				<hr>
+				<table class="table table-borderless">
+					<tr>
+						<td><input class="form-control" type="text" id="dice1" placeholder="주사위 1"></td>
+						<td><input class="form-control" type="text" id="dice2" placeholder="주사위 2"></td>
+					</tr>
+					<tr>
+						<td><input class="form-control" type="text" id="dice3" placeholder="주사위 3"></td>
+						<td><button class="btn btn-primary" onclick="answer3()">확인</button></td>
+					</tr>
+				</table>
+				<hr>
+				<div id="result3"></div>
+			</div>
     </div>
   </div>
 </body>

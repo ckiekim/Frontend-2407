@@ -19,6 +19,8 @@ function getAge(bYear, bMonth, bDay) {
 }
 function answer1() {
     let bYear = Number(document.getElementById('bYear').value);
+    // let monthTag = document.getElementById('bMonth');
+    // let bMonth = Number(monthTag.options[monthTag.selectedIndex].value);
     let bMonth = Number(document.getElementById('bMonth').value);
     let bDay = Number(document.getElementById('bDay').value);
 
