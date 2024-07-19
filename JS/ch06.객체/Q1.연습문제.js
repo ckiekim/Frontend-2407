@@ -10,3 +10,14 @@ for (let hour = 0; hour <= 23; hour++) {
     }
 }
 console.log(sum);
+
+// 어떤 문자열이 회문(palindrome)인가?
+// 문자열 뒤집기
+let a = 'Javascript';
+console.log(a.split('').reverse().join(''));
+
+function isPalindrome(str) {
+    return str === str.split('').reverse().join('');
+}
+console.log(isPalindrome('우영우'));
+console.log(isPalindrome('소주 만병만 주소'));
