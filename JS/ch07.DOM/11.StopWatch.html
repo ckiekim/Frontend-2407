@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <style>
+        button { padding: 5px; margin: 5px; font-size: 1.5rem;}
+    </style>
+    <script>
+        function twoDigit(num) {
+            return num < 10 ? '0' + num : String(num);      // 4 --> '04', 15 --> '15'
+        }
+        function displayTime(num) {
+            let minute = parseInt(num/600);
+            let second = parseInt(num/10) % 60;
+            return twoDigit(minute) + ':' + twoDigit(second) + '.' + num%10;
+        }
+        window.onload = () => {
+            let count = 0;
+            let si = null;
+            const display = document.getElementById('display');
+            const start = document.getElementById('start');
+            const stop = document.getElementById('stop');
+            const reset = document.getElementById('reset');
+
+            start.onclick = () => {
+                si = setInterval(() => {
+                    count++;
+                    display.innerHTML = displayTime(count);
+                }, 100);
+            }
+            stop.onclick = () => {
+                clearInterval(si);
+            }
+            reset.onclick = () => {
+                count = 0;
+                display.innerHTML = '00:00.0';
+            }
+        }
+    </script>
+</head>
+<body style="margin: 40px;">
+    <h1 id="display" style="font-size: 4rem;">00:00.0</h1>
+    <button id="start">시작</button>
+    <button id="stop">정지</button>
+    <button id="reset">리셋</button>
+</body>
+</html>
