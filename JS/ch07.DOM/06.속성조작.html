@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>속성조작</title>
+    <script>
+        window.onload = () => {
+            let image = document.querySelector('#image');
+            image.src = 'https://picsum.photos/320/160';
+            image.alt = '랜덤 이미지입니다.';
+            image.setAttribute('width', 640);
+            image.height = 320;
+
+            let width = image.getAttribute('width');
+            let height = image.height;
+            let alt = image.alt;
+            let info = `width: ${width}, height: ${height}, alt: ${alt}`;
+            document.querySelector('h3').innerText = info;
+        }
+    </script>
+</head>
+<body style="margin: 40px;">
+    <img id="image">
+    <h3></h3>
+</body>
+</html>
