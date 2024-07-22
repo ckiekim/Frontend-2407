@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이벤트 처리</title>
     <style>
-        button { padding: 5px; margin-right: 10px; }
+        button, input { padding: 5px; margin-right: 10px; }
     </style>
     <script>
         function btn2click() {
@@ -55,6 +55,20 @@
                     return false;       // 기본 이벤트 처리 제거
                 }
             }
+
+            // btn8: input 태그의 내용을 result에 출력
+            const btn8 = document.getElementById('btn8');
+            btn8.onclick = () => {
+                const name = document.getElementById('name').value;
+                document.getElementById('result').innerHTML = name;
+            }
+
+            // input 태그에 입력하자 마자 result에 출력
+            const input = document.getElementById('name');
+            input.onkeyup = () => {
+                const name = document.getElementById('name').value;
+                document.getElementById('result').innerHTML = name;
+            }
         }
     </script>
 </head>
@@ -63,11 +77,15 @@
     <button onclick="btn2click()">버튼 2</button>
     <button id="btn3">버튼 3</button>
     <br><br>
-    <button id="btn4">버튼 4</button>
-    <button id="btn5">버튼 5</button>
+    <button id="btn4">클릭, 마우스 오버, 마우스 아웃</button>
+    <button id="btn5">마우스 오버, 마우스 아웃</button>
     <br><br>
     <a href="https://www.hanbit.co.kr/academy/">한빛아카데미</a>
-    <button onclick="location.href='https://www.hanbit.co.kr/academy/'">버튼 6</button>
-    <button id="btn7">버튼 7</button>
+    <button onclick="location.href='https://www.hanbit.co.kr/academy/'">한빛아카데이</button>
+    <button id="btn7">a 태그 기본속성 제거</button>
+    <br><br>
+    <input type="text" id="name">
+    <button id="btn8">텍스트 인풋 처리</button>
+    <span id="result"></span>
 </body>
 </html>
