@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 처리</title>
+    <style>
+        button { padding: 5px; margin-right: 10px; }
+    </style>
+    <script>
+        function btn2click() {
+            alert('버튼 2가 클릭되었음.');
+        }
+        window.onload = () => {
+            const btn3 = document.getElementById('btn3');
+            btn3.onclick = () => {
+                alert('버튼 3이 클릭되었음.');
+            }
+
+            // btn4: 클릭, 마우스 오버, 마우스 아웃 이벤트 등록
+            const btn4 = document.getElementById('btn4');
+            btn4.addEventListener('click', () => {
+                alert('버튼 4가 클릭되었음.');
+            });
+            btn4.onmouseover = () => {
+                const h3 = document.createElement('h3');
+                h3.innerHTML = '마우스 오버 이벤트 발생';
+                document.body.appendChild(h3);
+            }
+            btn4.onmouseout = () => {
+                const h3 = document.querySelector('h3');
+                document.body.removeChild(h3);
+            }
+
+            // btn5: 마우스 오버, 마우스 아웃 이벤트 등록 (이미지 보여주기/없애기)
+            const btn5 = document.getElementById('btn5');
+            btn5.addEventListener('mouseover', () => {
+                const img = document.createElement('img');
+                img.src = '../../HTML/img/사하라.jpg';
+                img.width = 360;
+                img.style.display = 'block'; img.style.marginTop = '20px';
+                document.body.appendChild(img);
+            });
+            btn5.addEventListener('mouseout', () => {
+                const img = document.querySelector('img');
+                document.body.removeChild(img);
+            });
+
+            // btn7: a 태그의 기본 이벤트 처리를 제거
+            const btn7 = document.getElementById('btn7');
+            btn7.onclick = () => {
+                alert('a 태그의 기본 이벤트 처리를 제거하였음.');
+                const a = document.querySelector('a');
+                a.onclick = () => {
+                    return false;       // 기본 이벤트 처리 제거
+                }
+            }
+        }
+    </script>
+</head>
+<body style="margin: 40px;">
+    <button onclick="alert('버튼 1이 클릭되었음.')">버튼 1</button>
+    <button onclick="btn2click()">버튼 2</button>
+    <button id="btn3">버튼 3</button>
+    <br><br>
+    <button id="btn4">버튼 4</button>
+    <button id="btn5">버튼 5</button>
+    <br><br>
+    <a href="https://www.hanbit.co.kr/academy/">한빛아카데미</a>
+    <button onclick="location.href='https://www.hanbit.co.kr/academy/'">버튼 6</button>
+    <button id="btn7">버튼 7</button>
+</body>
+</html>
