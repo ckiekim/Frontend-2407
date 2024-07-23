@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Focus</title>
+    <style>
+        input { padding: 5px; margin: 5px; }
+    </style>
+    <script>
+        window.onload = () => {
+            const input1 = document.getElementById('input1');
+            const input2 = document.getElementById('input2');
+            const button = document.querySelector('button');
+            const result = document.getElementById('result');
+
+            const print = () => {
+                let resultStr = `${input1.value}-${input2.value}`;
+                result.innerHTML = resultStr;
+            }
+
+            input1.onkeyup = () => {
+                if (input1.value.length >= 6)
+                    input2.focus();
+            }
+            input2.onkeyup = e => {
+                // if (e.keyCode == 8 && input2.value.length == 0)     // 입력한 글자가 없고, 백스페이스를 입력했을때
+                if (e.code === 'Backspace' && input2.value.length == 0)
+                    input1.focus();
+                // if (e.keyCode == 13) 
+                if (e.code === 'Enter') 
+                    print();
+            }
+            button.onclick = () => {
+                print();
+            }
+        }
+    </script>
+</head>
+<body style="margin: 40px;">
+    주민등록번호: 
+    <input id="input1" type="text" maxlength="6" autofocus>
+    <span>-</span>
+    <input id="input2" type="text" maxlength="7">
+    <button>확인</button>
+    <div id="result"></div>
+</body>
+</html>
