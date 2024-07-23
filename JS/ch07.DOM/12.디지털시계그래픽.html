@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디지털 시계(그래픽 버전)</title>
+    <style>
+        img { width: 100px; }
+    </style>
+    <script>
+        function twoDigit(num) {
+            return num < 10 ? '0' + num : String(num);      // 4 --> '04', 15 --> '15'
+        }
+        function myDate(now) {
+            const week = '일월화수목금토'.split('');
+            return `${now.getFullYear()}-${twoDigit(now.getMonth() + 1)}-${twoDigit(now.getDate())}(${week[now.getDay() % 7]})`;
+        }
+        function myTime(now) {
+            return `${twoDigit(now.getHours())}:${twoDigit(now.getMinutes())}:${twoDigit(now.getSeconds())}`;
+        }
+        window.onload = () => {
+            setInterval(() => {
+                let now = new Date();
+                let dateStr = myDate(now);
+                document.getElementById('date').innerHTML = dateStr;
+    
+                let timeStr = myTime(now);
+                // document.getElementById('time').innerHTML = timeStr;
+                document.getElementById('h1').src = `img/${timeStr[0]}.svg`;
+                document.getElementById('h2').src = `img/${timeStr[1]}.svg`;
+                document.getElementById('m1').src = `img/${timeStr[3]}.svg`;
+                document.getElementById('m2').src = `img/${timeStr[4]}.svg`;
+                document.getElementById('s1').src = `img/${timeStr[6]}.svg`;
+                document.querySelector('#s2').src = `img/${timeStr[7]}.svg`;
+            }, 1000);
+        }
+    </script>
+</head>
+<body style="margin: 40px;">
+    <h1 id="date"></h1>
+    <hr><br>
+    <!-- <h1 id="time"></h1> -->
+    <img id="h1">
+    <img id="h2">
+    <img src="img/Colon.jpg">
+    <img id="m1">
+    <img id="m2">
+    <img src="img/Colon.jpg">
+    <img id="s1">
+    <img id="s2">
+</body>
+</html>
