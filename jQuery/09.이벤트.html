@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(() => {
+            $('h1')             // 모든 h1 태그에 대해
+                .on('mouseover', function(e) {      // 매개변수 e는 생략해도 됨
+                    $(this).css('backgroundColor', 'yellow');
+                })
+                .on('mouseout', function() {        // this를 사용하려면 화살표 함수를 사용하면 안됨
+                    $(this).css('backgroundColor', 'white');
+                });
+            $('h1').click(function() {
+                alert($(this).text());
+            });
+            $('body > h1:nth-child(3)')
+                .on('mouseover', function(e) {      // 매개변수 e는 생략해도 됨
+                    $(this).css('backgroundColor', 'cyan');
+                })
+                .on('mouseout', function() {        // this를 사용하려면 화살표 함수를 사용하면 안됨
+                    $(this).css('backgroundColor', 'white');
+                })
+                .on('click', function() {
+                    alert('헤더 3입니다.');
+                });
+        });
+    </script>
+</head>
+<body style="margin: 40px;">
+    <h1>Header 1</h1>
+    <h1>Header 2</h1>
+    <h1>Header 3</h1>
+</body>
+</html>

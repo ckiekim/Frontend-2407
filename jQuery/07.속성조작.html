@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>속성 조작</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(() => {
+            $('#image').attr({
+                src: 'https://picsum.photos/320/160',
+                alt: '랜덤 이미지입니다.',
+                width: 640, height: 320,
+            }).css('borderRadius', '10px');
+
+            let width = $('#image').attr('width');
+            let height = $('#image').attr('height');
+            let alt = $('#image').attr('alt');
+            let info = `width: ${width}, height: ${height}, alt: ${alt}`;
+            $('h3').html(info);
+        });
+    </script>
+</head>
+<body style="margin: 40px;">
+    <img id="image">
+    <h3></h3>
+</body>
+</html>
