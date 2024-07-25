@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카운트 다운</title>
+    <style>
+        input, button { padding: 5px; margin: 5px; }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        var count = 3;
+        function disp(num) {
+            $('<img></img>')
+                .attr({
+                    src: `../JS/ch07.DOM/img/${num}.svg`,
+                    width: 500, id: 'number',
+                })
+                .css('margin', '30px')
+                .appendTo($('#result'));
+        }
+        function hide() {
+            $('#number').remove();
+        }
+        function getRandomNumbers(num) {
+            // 1부터 num까지의 숫자를 포함하는 배열 생성
+            let numbers = Array.from({ length: num }, (_, index) => index + 1);
+
+            // 배열을 무작위로 섞기
+            for (let i = numbers.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+            }
+            return numbers;
+        }
+
+        function randomOrder() {
+            let number = parseInt($('input').val());
+            let result = getRandomNumbers(number);
+            disp(count--);
+            let si = setInterval(() => {
+                hide();
+                if (count != 0)
+                    disp(count--);
+                else {
+                    $('<h3></h3>')
+                        .text(`발표순서: ${result}`)
+                        .appendTo('#result');
+                }
+            }, 1000);
+            setTimeout(() => {
+                clearInterval(si);
+            }, 3020);
+        }
+    </script>
+</head>
+<body style="margin: 40px;">
+    <h1>발표순서 정하기</h1>
+    <input type="text" placeholder="발표할 팀이 몇팀입니까?">
+    <button onclick="randomOrder()">순서 정하기</button>
+    <hr>
+    <div id="result"></div>
+</body>
+</html>
