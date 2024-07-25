@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Stop Watch</title>
+    <style>
+        button { padding: 5px; margin: 5px; font-size: 1.5rem;}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        function twoDigit(num) {
+            return num < 10 ? '0' + num : String(num);      // 4 --> '04', 15 --> '15'
+        }
+        function displayTime(num) {
+            let minute = parseInt(num/600);
+            let second = parseInt(num/10) % 60;
+            return twoDigit(minute) + ':' + twoDigit(second) + '.' + num%10;
+        }
+        $(document).ready(() => {
+            let count = 0;
+            let si = null;
+            $('#start').click(() => {
+                si = setInterval(() => {
+                    count++;
+                    $('#display').text(displayTime(count));
+                }, 100);
+            });
+            $('#stop').click(() => {
+                clearInterval(si);
+            });
+            $('#reset').click(() => {
+                count = 0;
+                $('#display').text('00:00.0');
+            });
+        });
+    </script>
+</head>
+<body style="margin: 40px;">
+    <h1 id="display" style="font-size: 4rem;">00:00.0</h1>
+    <button id="start">시작</button>
+    <button id="stop">정지</button>
+    <button id="reset">리셋</button>
+</body>
+</html>
