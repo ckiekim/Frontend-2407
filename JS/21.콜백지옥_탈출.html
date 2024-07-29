@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도로명주소 + 카카오로컬 API + 지도</title>
+    <script src="key.js"></script>
+    <script>
+        const places = ['경기도청', '수원시청', '팔달구청', '영통구청', '권선구청', '장안구청'];
+        const roadBaseUrl = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
+        const kakaoBaseUrl = 'https://dapi.kakao.com/v2/local/search/address.json';
+        const params1 = 'currentPage=1&countPerPage=5';
+        const params3 = `confmKey=${roadAddrKey}&resultType=json`;
+
+        window.onload = () => {
+            const kakaoScript = document.createElement('script');
+            kakaoScript.src = `http://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJsKey}&autoload=false`;
+            kakaoScript.onload = () => {
+                kakao.maps.load(async () => {
+                    let coords = [];
+                    let sumLat = 0, sumLon = 0;
+                    for (let place of places) {
+                        let coord = await getCoord(place);
+                        coords.push(coord);
+                        sumLat += coord.lat;
+                        sumLon += coord.lon;
+                    }
+                    drawMaps(coords, sumLat / coords.length, sumLon / coords.length);
+                });
+            };
+            document.head.appendChild(kakaoScript);
+        };
+        
+        async function getCoord(place) {
+            const params2 = `keyword=${encodeURIComponent(place)}`;
+            const roadUrl = `${roadBaseUrl}?${params1}&${params2}&${params3}`;
+            const ul = document.getElementById('list');
+            
+            try {
+                let response = await fetch(roadUrl);
+                let result = await response.json();
+                let roadAddr = result.results.juso[0].roadAddr;
+                let li = document.createElement('li');
+                // document.getElementById('place').innerHTML = roadAddr;
+                
+                let kakaoUrl = `${kakaoBaseUrl}?query=${encodeURIComponent(roadAddr)}`;
+                let header = { Authorization: `KakaoAK ${kakaoRestKey}` };   
+                response = await fetch(kakaoUrl, { headers: header });
+                result = await response.json();
+                    
+                let lat = parseFloat(result.documents[0].y);
+                let lon = parseFloat(result.documents[0].x);
+                // document.getElementById('lat').innerHTML = '' + lat;
+                // document.getElementById('lon').innerHTML = String(lon);
+                let text = `${place}: ${roadAddr}, 위도: ${lat.toFixed(6)}, 경도: ${lon.toFixed(6)}`;
+                li.innerText = text;
+                ul.appendChild(li);
+                return {place, lat, lon};
+            } catch (error) {
+                console.log(error);
+                return {place, lat: null, lon: null};
+            }
+        }
+
+        function drawMaps(coords, avgLat, avgLon) {
+            console.log(avgLat, avgLon);
+            let container = document.getElementById('map');
+            let options = { 
+                center: new kakao.maps.LatLng(avgLat, avgLon),
+                level: 7 
+            };
+            let map = new kakao.maps.Map(container, options); 
+
+            for (let coord of coords) {
+                // console.log(coord);
+                let position = new kakao.maps.LatLng(coord.lat, coord.lon);
+                let marker = new kakao.maps.Marker({
+                    map: map,
+                    position: position              // position 으로 해도 됨
+                });
+    
+                let infowindow = new kakao.maps.InfoWindow({
+                    content : `<div style="padding:5px;">${coord.place}</div>`
+                });
+                kakao.maps.event.addListener(marker, 'mouseover', () => {
+                    infowindow.open(map, marker);
+                });
+                kakao.maps.event.addListener(marker, 'mouseout', () => {
+                    infowindow.close();
+                });            
+            }
+        }
+    </script>
+</head>
+<body style="margin: 40px;">
+    <h1>도로명주소 API + 카카오로컬 API + 지도</h1>
+    <hr>
+    <ul id="list">
+    </ul>
+    <div id="map" style="width:800px; height:600px; margin-top: 20px;"></div>
+</body>
+</html>

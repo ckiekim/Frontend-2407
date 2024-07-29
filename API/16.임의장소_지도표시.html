@@ -9,14 +9,12 @@
     </style>
     <script src="key.js"></script>
     <script>
-        window.onload = () => {
-            const kakaoScript = document.createElement('script');
-            kakaoScript.src = `http://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJsKey}&autoload=false`;
-            kakaoScript.onload = () => {
-                kakao.maps.load(() => { });
-            };
-            document.head.appendChild(kakaoScript);
+        const kakaoScript = document.createElement('script');
+        kakaoScript.src = `http://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJsKey}&autoload=false`;
+        kakaoScript.onload = () => {
+            kakao.maps.load(() => { });
         };
+        document.head.appendChild(kakaoScript);
 
         function handleMap() {
             const place = document.getElementById('input').value;
