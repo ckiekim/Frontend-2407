@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>임의장소 지도에 표시하기</title>
+    <style>
+        input, button { padding: 5px; }
+    </style>
+</head>
+<body style="margin: 40px;">
+    <h1>도로명주소 API + 카카오로컬 API + 지도</h1>
+    <hr>
+    <input onchange="handleMap()" type="text" id="input" placeholder="임의의 장소를 입력하세요.">
+    <button onclick="handleMap()">지도 그리기</button>
+    <hr>
+    <h3 id="place"></h3>
+    <ul>
+        <li>도로명주소: <span id="roadAddr"></span></li>
+        <li>위도: <span id="lat"></span></li>
+        <li>경도: <span id="lon"></span></li>
+    </ul>
+    <div id="map" style="width:600px; height:400px; margin-top: 20px;"></div>
+</body>
+</html>

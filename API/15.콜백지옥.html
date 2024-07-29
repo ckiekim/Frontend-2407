@@ -7,47 +7,46 @@
     <script src="key.js"></script>
     <script>
         window.onload = () => {
+            const place = '경기도청';
+            const roadBaseUrl = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
+            const kakaoBaseUrl = 'https://dapi.kakao.com/v2/local/search/address.json';
+            const params1 = 'currentPage=1&countPerPage=5';
+            const params2 = `keyword=${encodeURIComponent(place)}`;
+            const params3 = `confmKey=${roadAddrKey}&resultType=json`;
+            const roadUrl = `${roadBaseUrl}?${params1}&${params2}&${params3}`;
+
             const kakaoScript = document.createElement('script');
             kakaoScript.src = `http://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJsKey}&autoload=false`;
             kakaoScript.onload = () => {
-                kakao.maps.load(() => { });
-            };
-            document.head.appendChild(kakaoScript);
-
-            let place = '경기도청';
-            let roadBaseUrl = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
-            let kakaoBaseUrl = 'https://dapi.kakao.com/v2/local/search/address.json';
-            let params1 = 'currentPage=1&countPerPage=5';
-            let params2 = `keyword=${encodeURIComponent(place)}`;
-            let params3 = `confmKey=${roadAddrKey}&resultType=json`;
-            let roadUrl = `${roadBaseUrl}?${params1}&${params2}&${params3}`;
-
-            fetch(roadUrl)
-                .then(response => response.json())
-                .then(result => {
-                    // console.log(result);
-                    let roadAddr = result.results.juso[0].roadAddr;
-                    document.getElementById('place').innerHTML = roadAddr;
-                
-                    let kakaoUrl = `${kakaoBaseUrl}?query=${encodeURIComponent(roadAddr)}`;
-                    let header = { Authorization: `KakaoAK ${kakaoRestKey}` };   
-                    fetch(kakaoUrl, { headers: header })
+                kakao.maps.load(() => {
+                    fetch(roadUrl)
                         .then(response => response.json())
                         .then(result => {
                             // console.log(result);
-                            let lat = parseFloat(result.documents[0].y);
-                            let lon = parseFloat(result.documents[0].x);
-                            document.getElementById('lat').innerHTML = '' + lat;
-                            document.getElementById('lon').innerHTML = String(lon);
-
-                            drawMap(place, lat, lon);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        }); 
+                            let roadAddr = result.results.juso[0].roadAddr;
+                            document.getElementById('place').innerHTML = roadAddr;
+                        
+                            let kakaoUrl = `${kakaoBaseUrl}?query=${encodeURIComponent(roadAddr)}`;
+                            let header = { Authorization: `KakaoAK ${kakaoRestKey}` };   
+                            fetch(kakaoUrl, { headers: header })
+                                .then(response => response.json())
+                                .then(result => {
+                                    // console.log(result);
+                                    let lat = parseFloat(result.documents[0].y);
+                                    let lon = parseFloat(result.documents[0].x);
+                                    document.getElementById('lat').innerHTML = '' + lat;
+                                    document.getElementById('lon').innerHTML = String(lon);
+        
+                                    drawMap(place, lat, lon);
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                }); 
+                        });
                 });
+            };
+            document.head.appendChild(kakaoScript);
 
-            // document.querySelector('p').innerHTML = url;
         };
 
         function drawMap(place, lat, lon) {
