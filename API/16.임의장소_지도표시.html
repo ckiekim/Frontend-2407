@@ -7,6 +7,82 @@
     <style>
         input, button { padding: 5px; }
     </style>
+    <script src="key.js"></script>
+    <script>
+        window.onload = () => {
+            const kakaoScript = document.createElement('script');
+            kakaoScript.src = `http://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJsKey}&autoload=false`;
+            kakaoScript.onload = () => {
+                kakao.maps.load(() => { });
+            };
+            document.head.appendChild(kakaoScript);
+        };
+
+        function handleMap() {
+            const place = document.getElementById('input').value;
+            const roadBaseUrl = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
+            const kakaoBaseUrl = 'https://dapi.kakao.com/v2/local/search/address.json';
+            const params1 = 'currentPage=1&countPerPage=5';
+            const params2 = `keyword=${encodeURIComponent(place)}`;
+            const params3 = `confmKey=${roadAddrKey}&resultType=json`;
+            const roadUrl = `${roadBaseUrl}?${params1}&${params2}&${params3}`;
+            
+            document.getElementById('place').innerHTML = place;
+            fetch(roadUrl)
+                .then(response => response.json())
+                .then(result => {
+                    // console.log(result);
+                    let roadAddr = result.results.juso[0].roadAddr;
+                    document.getElementById('roadAddr').innerHTML = roadAddr;
+                
+                    let kakaoUrl = `${kakaoBaseUrl}?query=${encodeURIComponent(roadAddr)}`;
+                    let header = { Authorization: `KakaoAK ${kakaoRestKey}` };   
+                    fetch(kakaoUrl, { headers: header })
+                        .then(response => response.json())
+                        .then(result => {
+                            // console.log(result);
+                            let lat = parseFloat(result.documents[0].y);
+                            let lon = parseFloat(result.documents[0].x);
+                            document.getElementById('lat').innerHTML = '' + lat;
+                            document.getElementById('lon').innerHTML = String(lon);
+
+                            drawMap(place, lat, lon);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        }); 
+                });
+        }
+
+        function drawMap(place, lat, lon) {
+            // console.log(place, lat, lon);
+            let container = document.getElementById('map');
+            let position = new kakao.maps.LatLng(lat, lon);
+            let options = { 
+                center: position, 
+                level: 4 
+            };
+            let map = new kakao.maps.Map(container, options); 
+
+            // 마커 생성
+            let marker = new kakao.maps.Marker({
+                map: map,
+                position: position              // position 으로 해도 됨
+            });
+
+            // 인포 윈도우 생성
+            let infowindow = new kakao.maps.InfoWindow({
+                content : `<div style="padding:5px;">${place}</div>`
+            });
+            // 마우스오버 이벤트, 마우스아웃 이벤트 등록
+            kakao.maps.event.addListener(marker, 'mouseover', () => {
+                infowindow.open(map, marker);
+            });
+            kakao.maps.event.addListener(marker, 'mouseout', () => {
+                infowindow.close();
+            });            
+        }
+    </script>
 </head>
 <body style="margin: 40px;">
     <h1>도로명주소 API + 카카오로컬 API + 지도</h1>
@@ -14,7 +90,7 @@
     <input onchange="handleMap()" type="text" id="input" placeholder="임의의 장소를 입력하세요.">
     <button onclick="handleMap()">지도 그리기</button>
     <hr>
-    <h3 id="place"></h3>
+    <h3 id="place">임의의 장소</h3>
     <ul>
         <li>도로명주소: <span id="roadAddr"></span></li>
         <li>위도: <span id="lat"></span></li>
