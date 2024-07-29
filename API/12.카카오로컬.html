@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오 로컬 API</title>
+    <script src="key.js"></script>
+    <script>
+        window.onload = () => {
+            let base_url = 'https://dapi.kakao.com/v2/local/search/address.json';
+            let addr = '경기도 수원시 영통구 도청로 30 (이의동)';
+            let url = `${base_url}?query=${encodeURIComponent(addr)}`;
+
+            // 헤더: Authorization: KakaoAK ${REST_API_KEY}
+            let header = { Authorization: `KakaoAK ${kakaoRestKey}` };
+
+            fetch(url, { headers: header })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        };
+    </script>
+</head>
+<body style="margin: 40px;">
+    <h1>카카오 로컬 API</h1>
+    <hr>
+    <h3>경기도청</h3>
+    <ul>
+        <li>도로명주소: 경기도 수원시 영통구 도청로 30 (이의동)</li>
+        <li>위도: <span id="lat"></span></li>
+        <li>경도: <span id="lon"></span></li>
+    </ul>
+</body>
+</html>
