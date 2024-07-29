@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도로명주소 + 카카오로컬 API + 지도</title>
+    <script src="key.js"></script>
+    <script>
+        window.onload = () => {
+            const kakaoScript = document.createElement('script');
+            kakaoScript.src = `http://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJsKey}&autoload=false`;
+            kakaoScript.onload = () => {
+                kakao.maps.load(() => { });
+            };
+            document.head.appendChild(kakaoScript);
+
+            let roadBaseUrl = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
+            let kakaoBaseUrl = 'https://dapi.kakao.com/v2/local/search/address.json';
+            let params1 = 'currentPage=1&countPerPage=5';
+            let params2 = `keyword=${encodeURIComponent('수원시청')}`;
+            let params3 = `confmKey=${roadAddrKey}&resultType=json`;
+            let roadUrl = `${roadBaseUrl}?${params1}&${params2}&${params3}`;
+
+            fetch(roadUrl)
+                .then(response => response.json())
+                .then(result => {
+                    // console.log(result);
+                    let roadAddr = result.results.juso[0].roadAddr;
+                    document.getElementById('place').innerHTML = roadAddr;
+                
+                    let kakaoUrl = `${kakaoBaseUrl}?query=${encodeURIComponent(roadAddr)}`;
+                    let header = { Authorization: `KakaoAK ${kakaoRestKey}` };   
+                    fetch(kakaoUrl, { headers: header })
+                        .then(response => response.json())
+                        .then(result => {
+                            // console.log(result);
+                            let lat = parseFloat(result.documents[0].y);
+                            let lon = parseFloat(result.documents[0].x);
+                            document.getElementById('lat').innerHTML = '' + lat;
+                            document.getElementById('lon').innerHTML = String(lon);
+
+                            drawMap('수원시청', lat, lon);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        }); 
+                });
+
+            // document.querySelector('p').innerHTML = url;
+        };
+
+        function drawMap(place, lat, lon) {
+            // console.log(place, lat, lon);
+            let container = document.getElementById('map');
+            let position = new kakao.maps.LatLng(lat, lon);
+            let options = { 
+                center: position, 
+                level: 3 
+            };
+            let map = new kakao.maps.Map(container, options); 
+
+            // 마커 생성
+            let marker = new kakao.maps.Marker({
+                map: map,
+                position: position              // position 으로 해도 됨
+            });
+
+            // 인포 윈도우 생성
+            let infowindow = new kakao.maps.InfoWindow({
+                content : `<div style="padding:5px;">${place}</div>`
+            });
+            // 마우스오버 이벤트, 마우스아웃 이벤트 등록
+            kakao.maps.event.addListener(marker, 'mouseover', () => {
+                infowindow.open(map, marker);
+            });
+            kakao.maps.event.addListener(marker, 'mouseout', () => {
+                infowindow.close();
+            });            
+        }
+    </script>
+</head>
+<body style="margin: 40px;">
+    <h1>도로명주소 API + 카카오로컬 API + 지도</h1>
+    <hr>
+    <h3>수원시청</h3>
+    <ul>
+        <li>도로명주소: <span id="place"></span></li>
+        <li>위도: <span id="lat"></span></li>
+        <li>경도: <span id="lon"></span></li>
+    </ul>
+    <div id="map" style="width:600px; height:400px; margin-top: 20px;"></div>
+</body>
+</html>
