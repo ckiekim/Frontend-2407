@@ -7,9 +7,9 @@
     <script src="key.js"></script>
     <script>
         window.onload = () => {
-            let base_url = 'https://dapi.kakao.com/v2/local/search/address.json';
+            let baseUrl = 'https://dapi.kakao.com/v2/local/search/address.json';
             let addr = '경기도 수원시 영통구 도청로 30 (이의동)';
-            let url = `${base_url}?query=${encodeURIComponent(addr)}`;
+            let url = `${baseUrl}?query=${encodeURIComponent(addr)}`;
 
             // 헤더: Authorization: KakaoAK ${REST_API_KEY}
             let header = { Authorization: `KakaoAK ${kakaoRestKey}` };
@@ -18,6 +18,10 @@
                 .then(response => response.json())
                 .then(result => {
                     console.log(result);
+                    let lat = result.documents[0].y;
+                    let lon = result.documents[0].x;
+                    document.getElementById('lat').innerHTML = lat;
+                    document.getElementById('lon').innerHTML = lon;
                 })
                 .catch(error => {
                     console.log(error);

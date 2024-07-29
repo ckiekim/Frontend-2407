@@ -7,18 +7,34 @@
     <script src="key.js"></script>
     <script>
         window.onload = () => {
-            let base_url = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
+            let roadBaseUrl = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
+            let kakaoBaseUrl = 'https://dapi.kakao.com/v2/local/search/address.json';
             let params1 = 'currentPage=1&countPerPage=5';
-            let params2 = `keyword=${encodeURIComponent('수원시청')}`;      // 한글은 반드시 인코딩해주어야 함
+            let params2 = `keyword=${encodeURIComponent('수원시청')}`;
             let params3 = `confmKey=${roadAddrKey}&resultType=json`;
-            let url = `${base_url}?${params1}&${params2}&${params3}`;
+            let roadUrl = `${roadBaseUrl}?${params1}&${params2}&${params3}`;
 
-            fetch(url)
+            fetch(roadUrl)
                 .then(response => response.json())
                 .then(result => {
                     // console.log(result);
                     let roadAddr = result.results.juso[0].roadAddr;
                     document.getElementById('place').innerHTML = roadAddr;
+                
+                    let kakaoUrl = `${kakaoBaseUrl}?query=${encodeURIComponent(roadAddr)}`;
+                    let header = { Authorization: `KakaoAK ${kakaoRestKey}` };   
+                    fetch(kakaoUrl, { headers: header })
+                        .then(response => response.json())
+                        .then(result => {
+                            // console.log(result);
+                            let lat = result.documents[0].y;
+                            let lon = result.documents[0].x;
+                            document.getElementById('lat').innerHTML = lat;
+                            document.getElementById('lon').innerHTML = lon;
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        }); 
                 });
 
             // document.querySelector('p').innerHTML = url;

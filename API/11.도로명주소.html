@@ -7,11 +7,11 @@
     <script src="key.js"></script>
     <script>
         window.onload = () => {
-            let base_url = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
+            let baseUrl = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
             let params1 = 'currentPage=1&countPerPage=5';
             let params2 = `keyword=${encodeURIComponent('경기도청')}`;      // 한글은 반드시 인코딩해주어야 함
             let params3 = `confmKey=${roadAddrKey}&resultType=json`;
-            let url = `${base_url}?${params1}&${params2}&${params3}`;
+            let url = `${baseUrl}?${params1}&${params2}&${params3}`;
 
             fetch(url)
                 .then(response => response.json())
