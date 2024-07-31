@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오맵 타입</title>
+    <script src="key.js"></script>
+    <script>
+        var currentTypeId, map;
+        window.onload = () => {
+            const kakaoScript = document.createElement('script');
+            kakaoScript.src = `http://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJsKey}&autoload=false`;
+            kakaoScript.onload = () => {
+                kakao.maps.load(() => { 
+                    initializeMap();
+                });
+            };
+            document.head.appendChild(kakaoScript);
+        }
+
+        function setOverlayMapTypeId(maptype) {
+            let changeMaptype;
+            // maptype에 따라 지도에 추가할 지도타입을 결정
+            switch(maptype) {
+            case 'roadmap':
+                changeMaptype = kakao.maps.MapTypeId.ROADMAP; break;    // 기본 지도
+            case 'traffic':
+                changeMaptype = kakao.maps.MapTypeId.TRAFFIC; break;    // 교통정보 지도타입
+            case 'roadview':
+                changeMaptype = kakao.maps.MapTypeId.ROADVIEW; break;   // 로드뷰 도로정보 지도타입
+            case 'terrain':
+                changeMaptype = kakao.maps.MapTypeId.TERRAIN; break;    // 지형정보 지도타입
+            case 'use_district':
+                changeMaptype = kakao.maps.MapTypeId.USE_DISTRICT; break;   // 지적편집도 지도타입
+            }
+            
+            // 이미 등록된 지도 타입이 있으면 제거
+            if (currentTypeId) 
+                map.removeOverlayMapTypeId(currentTypeId);    
+            
+            map.addOverlayMapTypeId(changeMaptype);     // maptype에 해당하는 지도타입을 지도에 추가
+            currentTypeId = changeMaptype;              // 지도에 추가된 타입정보를 갱신
+        }
+
+        function initializeMap() {
+            let container = document.getElementById('map'); 
+            let position = new kakao.maps.LatLng(37.289285, 127.053543);
+            let options = { 
+                center: position, 
+                level: 3 
+            };
+            map = new kakao.maps.Map(container, options); 
+
+            let roadviewContainer = document.getElementById('roadview');
+            let roadview = new kakao.maps.Roadview(roadviewContainer);      //로드뷰 객체
+            let roadviewClient = new kakao.maps.RoadviewClient();       //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+            // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+            roadviewClient.getNearestPanoId(position, 100, function(panoId) {
+                roadview.setPanoId(panoId, position);       //panoId와 중심좌표를 통해 로드뷰 실행
+            });
+        }
+    </script>
+</head>
+<body style="margin: 40px;">
+    <h1>여러가지 카카오맵 타입</h1>
+    <hr>
+    <div id="map" style="width:600px; height:400px;"></div>
+    <p>
+        <button onclick="setOverlayMapTypeId('roadmap')">기본 지도</button> 
+        <button onclick="setOverlayMapTypeId('traffic')">교통정보 보기</button> 
+        <button onclick="setOverlayMapTypeId('roadview')">로드뷰 도로정보 보기</button> 
+        <button onclick="setOverlayMapTypeId('terrain')">지형정보 보기</button>
+        <button onclick="setOverlayMapTypeId('use_district')">지적편집도 보기</button>
+    </p>
+    <div id="roadview" style="width:600px; height:400px;"></div>
+</body>
+</html>
