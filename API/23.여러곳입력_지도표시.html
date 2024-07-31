@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여러곳 입력받아 지도에 표시하기</title>
+    <style>
+        input, button { padding: 5px; margin-right: 5px; }
+    </style>
+    <script src="key.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        const roadBaseUrl = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
+        const kakaoBaseUrl = 'https://dapi.kakao.com/v2/local/search/address.json';
+        const params1 = 'currentPage=1&countPerPage=5';
+        const params3 = `confmKey=${roadAddrKey}&resultType=json`;
+        const header = { Authorization: `KakaoAK ${kakaoRestKey}` };
+
+        const kakaoScript = document.createElement('script');
+        kakaoScript.src = `http://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJsKey}&autoload=false`;
+        kakaoScript.onload = () => {
+            kakao.maps.load(() => { });
+        };
+        document.head.appendChild(kakaoScript);
+
+        async function handleMaps() {
+            let places = [];
+            for (let i = 1; i <= 5; i++)
+                places.push($(`#input${i}`).val());
+
+            let coords = [];
+            let sumLat = 0.0, sumLon = 0.0;
+            for (let place of places) {
+                const coord = await getCoord(place);
+                coords.push(coord);
+                sumLat += coord.lat; sumLon += coord.lon;
+                let text = `${place}: ${coord.roadAddr}, 위도: ${coord.lat.toFixed(6)}, 경도: ${coord.lon.toFixed(6)}`;
+                $('<li></li>')
+                    .html(text)
+                    .appendTo($('#list'));
+            }
+            drawMaps(coords, sumLat/coords.length, sumLon/coords.length);
+        }
+
+        async function getCoord(place) {
+            try {
+                const params2 = `keyword=${encodeURIComponent(place)}`;
+                const roadUrl = `${roadBaseUrl}?${params1}&${params2}&${params3}`;
+
+                let response = await fetch(roadUrl);
+                let result = await response.json();
+                let roadAddr = result.results.juso[0].roadAddr;
+
+                let kakaoUrl = `${kakaoBaseUrl}?query=${encodeURIComponent(roadAddr)}`;
+                response = await fetch(kakaoUrl, { headers: header });
+                result = await response.json();
+                let lat = parseFloat(result.documents[0].y);
+                let lon = parseFloat(result.documents[0].x);
+                return {place, roadAddr, lat, lon};
+            } catch(error) {
+                console.log(error);
+                return {place, roadAddr:null, lat:null, lon:null};
+            }
+        }
+
+        function drawMaps(coords, centerLat, centerLon) {
+            let container = document.getElementById('map');
+            let center = new kakao.maps.LatLng(centerLat, centerLon);
+            let map = new kakao.maps.Map(container, { center, level: 7 }); 
+
+            for (let coord of coords) {
+                let marker = new kakao.maps.Marker({
+                    map: map,
+                    position: new kakao.maps.LatLng(coord.lat, coord.lon)
+                });
+                let infowindow = new kakao.maps.InfoWindow({
+                    content : `<div style="padding:5px;">${coord.place}<br>${coord.roadAddr}</div>`
+                });
+                kakao.maps.event.addListener(marker, 'mouseover', () => {
+                    infowindow.open(map, marker);
+                });
+                kakao.maps.event.addListener(marker, 'mouseout', () => {
+                    infowindow.close();
+                });            
+            }
+        }
+    </script>
+</head>
+<body style="margin: 40px;">
+    <h3>여러곳 입력받아 지도에 표시하기</h3>
+    <hr>
+    <input type="text" id="input1" placeholder="장소명을 입력하세요">
+    <input type="text" id="input2" placeholder="장소명을 입력하세요">
+    <input type="text" id="input3" placeholder="장소명을 입력하세요">
+    <input type="text" id="input4" placeholder="장소명을 입력하세요">
+    <input type="text" id="input5" placeholder="장소명을 입력하세요">
+    <button onclick="handleMaps()">지도에 표시하기</button>
+    <hr>
+    <ul id="list">
+    </ul>
+    <div id="map" style="width:800px; height:600px; margin-top: 20px;"></div>
+</body>
+</html>
