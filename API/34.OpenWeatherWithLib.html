@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Weather API 2.5</title>
+	<style>
+		input, button { padding: 5px; margin-right: 10px; }
+	</style>
+    <script src="key.js"></script>
+	<script src="apilib.js"></script>
+	<script>
+		async function handleWeather() {
+			const place = document.getElementById('place').value;
+			const {lat, lon} = await getCoord(place);
+			const {desc, iconUrl, temp} = await getWeather(lat, lon);
+			const html = `<img src="${iconUrl}" height="28"> <strong>${desc}</strong>, 온도: ${temp}&#8451`;
+			document.getElementById('weather').innerHTML = html;
+		}
+	</script>
+</head>
+<body style="margin: 40px;">
+	<h1>Open Weather API 2.5</h1>
+	<hr>
+	<input onchange="handleWeather()" type="text" id="place">
+	<button onclick="handleWeather()">날씨</button>
+	<div id="weather" style="vertical-align: center;"></div>
+</body>
+</html>
